@@ -6,7 +6,7 @@ const {
   addContact,
   updateContactById,
 } = require('./actions');
-const { red } = require('./colors/colors');
+const { red, yellow } = require('./colors/colors');
 const options = require('./helpers/options');
 
 const program = new Command();
@@ -28,6 +28,10 @@ async function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case 'get':
+      if (!id)
+        return console.error(
+          `${yellow} Warning: "id" is required! "-h, --help"`,
+        );
       const contactById = await getContactById(id);
       contactById
         ? console.table(contactById)
@@ -35,11 +39,15 @@ async function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case 'add':
+      if (!name || !email || !phone)
+        return console.error(`${yellow} Warning: "id" is required! -h, --help`);
       const addedContact = await addContact(name, email, phone);
       console.table(addedContact);
       break;
 
     case 'update':
+      if (!id || !name || !email || !phone)
+        return console.error(`${yellow} Warning: "id" is required! -h, --help`);
       const updatedContact = await updateContactById(id, name, email, phone);
       updatedContact
         ? console.table(updatedContact)
@@ -47,6 +55,8 @@ async function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case 'remove':
+      if (!id)
+        return console.error(`${yellow} Warning: "id" is required! -h, --help`);
       const removedContact = await removeContact(id);
       removedContact
         ? console.table(removedContact)

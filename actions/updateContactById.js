@@ -11,7 +11,7 @@ async function updateContactById(contactId, name, email, phone) {
     fileWriteOperation(contacts);
     return contacts[index];
   } catch (error) {
-    throw new Error(error.message);
+    return error.message;
   }
 }
 

@@ -12,7 +12,7 @@ async function removeContact(contactId) {
     fileWriteOperation(filteredContacts);
     return deletedContact;
   } catch (error) {
-    throw new Error(error.message);
+    return error.message;
   }
 }
 

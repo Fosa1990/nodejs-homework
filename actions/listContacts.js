@@ -6,7 +6,7 @@ async function listContacts() {
     const content = await fs.readFile(contactsPath, 'utf8');
     return JSON.parse(content);
   } catch (error) {
-    throw new Error(error.message);
+    return error.message;
   }
 }
 

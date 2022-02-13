@@ -6,7 +6,7 @@ async function getContactById(contactId) {
     const result = contacts.find(contact => contact.id === contactId);
     return result;
   } catch (error) {
-    throw new Error(error.message);
+    return error.message;
   }
 }
 
